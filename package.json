@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/latinawhocodes/BookshopApp/issues"
   },
-  "homepage": "https://github.com/latinawhocodes/BookshopApp#readme"
+  "homepage": "https://github.com/latinawhocodes/BookshopApp#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node": "^16.6.1"
+  }
 }
