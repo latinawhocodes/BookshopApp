@@ -1,0 +1,20 @@
+{
+  "name": "bookshopapp",
+  "version": "1.0.0",
+  "description": "A bookshop app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/latinawhocodes/BookshopApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/latinawhocodes/BookshopApp/issues"
+  },
+  "homepage": "https://github.com/latinawhocodes/BookshopApp#readme"
+}
