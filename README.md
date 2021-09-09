@@ -1,2 +1,0 @@
-# BookshopApp
-A bookshop app 
