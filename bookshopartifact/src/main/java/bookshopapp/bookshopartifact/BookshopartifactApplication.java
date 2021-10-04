@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackageClasses = controllers.BookController.class)
 @ComponentScan(basePackageClasses = controllers.BookController.class)
 @ComponentScan(basePackageClasses = services.UserService.class)
-//@ComponentScan(basePackageClasses = controllers.WishListController.class)
+@ComponentScan(basePackageClasses = controllers.WishlistController.class)
 
 
 public class BookshopartifactApplication {

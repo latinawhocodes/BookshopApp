@@ -87,20 +87,33 @@ public class WishList {
 
                 String wln = resultSet.getString("WishListName");
                 String un = resultSet.getString("Username");
-                String isbn = resultSet.getString("isbn");
+                String isbn = resultSet.getString("ISBN");
+                int i = 0;
 
                 //if there is already a wishlist for that username & wishlist name, just add book to it , otherwise create new wishlist
                 for (WishList w : wishList) {
                     if(w.getWishListName().equals(wln)) {
+                        i = 1;				
                         List <Book> books = Book.GetAllBooks();
                         for (Book b : books) {
 			                if (b.getISBN ().equals(isbn)) {
-				                w.addBook(b);				
+				                w.addBook(b);
 			                }
                         }
                     }
                 }
-                List <Book> books = Book.GetAllBooks();
+                if (i==0) {
+                    List <Book> books = Book.GetAllBooks();
+		            List <Book> booksToAdd = new ArrayList <Book> ();
+		            for (Book b : books) {
+			            if (b.getISBN ().equals(isbn)) {
+				            booksToAdd.add(b);		
+                            WishList singleWishList = new WishList(wln, un, booksToAdd);
+                            wishList.add(singleWishList);		
+			            }
+                    }  
+                }
+            /*   List <Book> books = Book.GetAllBooks();
 		        List <Book> booksToAdd = new ArrayList <Book> ();
 		        for (Book b : books) {
 			        if (b.getISBN ().equals(isbn)) {
@@ -108,7 +121,7 @@ public class WishList {
                         WishList singleWishList = new WishList(wln, un, booksToAdd);
                         wishList.add(singleWishList);		
 			        }
-                }  
+                }*/  
 		    }     
        } catch (SQLException e) {
             System.out.println(e.getMessage());
