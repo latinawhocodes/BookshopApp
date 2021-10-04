@@ -1,0 +1,42 @@
+package book.rating;
+
+import java.util.Scanner;
+
+public class BookRating {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        int rating = 0;
+        int numOfRates = 0;
+        double rateAvg = 0;
+
+        System.out.println("What book would you like to rate?\n");
+        
+        String bookTitle = scan.nextLine();
+
+        System.out.println("");
+     
+        System.out.println("What would you rate \"" + bookTitle + "\"?\n(Please enter a whole number between 1 and 10)\n");
+        
+        int userRate = scan.nextInt();
+
+        System.out.println("");
+
+        if (userRate == 0 && userRate < 0) {
+            System.out.println("Sorry, but the number you have entered is too low.\nPlease try again later.");
+        }else if (userRate > 0 && userRate < 11) {
+            numOfRates++;
+            
+            rating += userRate;
+
+            rateAvg = (double)rating/numOfRates;
+           
+            System.out.println("Your rating for \" " + bookTitle + "\" is: " + userRate + "\n");
+
+            System.out.println("Now \" " + bookTitle + "\" has a rating of " + rateAvg + " out of " + numOfRates + " rating(s).");
+        }else {
+            System.out.println("Sorry, but the number you have entered is too high.\nPlease try again later.");
+        }
+    }
+}
