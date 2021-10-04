@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "bookshopartifact/src/main",
+        "bookshopartifact"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
+}
