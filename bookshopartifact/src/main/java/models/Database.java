@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class Database {
 
-    private static Connection connection;
+    public static Connection connection;
     
     public static void SetConnection() {
         if (connection == null) {
