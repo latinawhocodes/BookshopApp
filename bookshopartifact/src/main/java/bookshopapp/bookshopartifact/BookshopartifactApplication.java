@@ -8,8 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackageClasses = controllers.BookController.class)
+@ComponentScan(basePackageClasses = controllers.UsersController.class)
 public class BookshopartifactApplication {
 
 	public static void main(String[] args) {
