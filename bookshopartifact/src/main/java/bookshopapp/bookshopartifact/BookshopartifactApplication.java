@@ -12,7 +12,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackageClasses = controllers.BookController.class)
-@ComponentScan(basePackageClasses = controllers.UsersController.class)
+@ComponentScan(basePackageClasses = controllers.BookController.class)
+@ComponentScan(basePackageClasses = services.UserService.class)
+
+
 public class BookshopartifactApplication {
 
 	public static void main(String[] args) {
