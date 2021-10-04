@@ -7,6 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackageClasses = controllers.BookController.class)
 @ComponentScan(basePackageClasses = controllers.UsersController.class)
+@ComponentScan(basePackageClasses = controllers.WishListController.class)
+
 public class BookshopartifactApplication {
 
 	public static void main(String[] args) {
