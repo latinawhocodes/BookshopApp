@@ -1,4 +1,4 @@
-package bookshopapp.bookshopartifact.services;
+package services;
 
 import org.springframework.stereotype.Service;
 

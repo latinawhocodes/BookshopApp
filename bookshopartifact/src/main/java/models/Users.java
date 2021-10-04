@@ -1,4 +1,4 @@
-package bookshopapp.bookshopartifact.models;
+package models;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan
