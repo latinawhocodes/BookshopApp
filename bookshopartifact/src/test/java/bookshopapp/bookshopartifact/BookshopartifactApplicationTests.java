@@ -33,11 +33,7 @@ class BookshopartifactApplicationTests {
 		String jsonRequestBody = gson.toJson(generateFakeUser());
 		this.mvc.perform(	
 			get("/users/create")
-			.contentType("application/json").content(jsonRequestBody)).andExpect(status().isForbidden());
-	}
-
-	@Test
-	void contextLoads() {
+			.contentType("application/json").content(jsonRequestBody)).andExpect(status().isOk());
 	}
 
 }
