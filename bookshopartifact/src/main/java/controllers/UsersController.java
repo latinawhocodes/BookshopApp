@@ -21,6 +21,7 @@ public class UsersController {
     
     @GetMapping("/users/create")
     public Users create(@RequestBody Users user) {
+        Users.saveUser(user);
         return user;
     }
     
