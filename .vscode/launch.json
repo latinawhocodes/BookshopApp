@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BookshopartifactApplication<bookshopartifact>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "bookshopapp.bookshopartifact.BookshopartifactApplication",
+            "projectName": "bookshopartifact",
+            "args": ""
+        }
+    ]
+}
