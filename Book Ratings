@@ -3,22 +3,23 @@ package book.rating;
 import java.util.Scanner;
 
 public class BookRating {
+
     private String pBook;
     private int pRate;
     private int pNOfR;
     private double pRateAvg; 
 
     private BookRating (String pBook, int pRate, int pNOfR, double pRateAvg) {
+    
         this.pBook = pBook;
         this.pRate = pRate;
         this.pNOfR = pNOfR;
         this.pRateAvg = pRateAvg;
-        
         int rating = 0;
 
         if (pRate == 0 || pRate < 0) {
             System.out.println("Sorry, but the number you have entered is too low.\nPlease try again later.");
-        }else if (pRate > 0 && pRate < 11) {
+        }else if (pRate > 0 && pRate < 6) {
             pNOfR++;
             
             rating += pRate;
@@ -34,6 +35,7 @@ public class BookRating {
     }
 
     public static class Numbers {
+    
         private String pBook;
         private int pRate;
         private int pNOfR;
