@@ -3,6 +3,63 @@ package book.rating;
 import java.util.Scanner;
 
 public class BookRating {
+    private String pBook;
+    private int pRate;
+    private int pNOfR;
+    private double pRateAvg; 
+
+    private BookRating (String pBook, int pRate, int pNOfR, double pRateAvg) {
+        this.pBook = pBook;
+        this.pRate = pRate;
+        this.pNOfR = pNOfR;
+        this.pRateAvg = pRateAvg;
+        
+        int rating = 0;
+
+        if (pRate == 0 || pRate < 0) {
+            System.out.println("Sorry, but the number you have entered is too low.\nPlease try again later.");
+        }else if (pRate > 0 && pRate < 11) {
+            pNOfR++;
+            
+            rating += pRate;
+
+            pRateAvg = (double)rating/pNOfR;
+
+            System.out.println("Your rating for \"" + pBook + "\" is: " + pRate + "\n");
+
+            System.out.println("Now \"" + pBook + "\" has a rating of " + pRateAvg + " out of " + pNOfR + " rating(s).");
+        }else {
+            System.out.println("Sorry, but the number you have entered is too high.\nPlease try again later.");
+        }
+    }
+
+    public static class Numbers {
+        private String pBook;
+        private int pRate;
+        private int pNOfR;
+        private double pRateAvg;
+
+        public Numbers setpBook (String pBook) {
+            this.pBook = pBook;
+            return this;
+        }
+        public Numbers setpRate(int pRate) {
+            this.pRate = pRate;
+            return this;
+        }
+        public Numbers setpNOfR (int pNOfR) {
+            this.pNOfR = pNOfR;
+            return this;
+        }
+        public Numbers setpRateAvg (double pRateAvg) {
+            this.pRateAvg = pRateAvg;
+            return this;
+        }
+        public BookRating build() {
+            return new BookRating(pBook, pRate, pNOfR, pRateAvg);
+        }
+    }
+
 
     public static void main(String[] args) {
 
@@ -23,20 +80,12 @@ public class BookRating {
 
         System.out.println("");
 
-        if (userRate == 0 && userRate < 0) {
-            System.out.println("Sorry, but the number you have entered is too low.\nPlease try again later.");
-        }else if (userRate > 0 && userRate < 11) {
-            numOfRates++;
-            
-            rating += userRate;
-
-            rateAvg = (double)rating/numOfRates;
-           
-            System.out.println("Your rating for \" " + bookTitle + "\" is: " + userRate + "\n");
-
-            System.out.println("Now \" " + bookTitle + "\" has a rating of " + rateAvg + " out of " + numOfRates + " rating(s).");
-        }else {
-            System.out.println("Sorry, but the number you have entered is too high.\nPlease try again later.");
-        }
+        BookRating.Numbers num = new BookRating.Numbers();
+            BookRating bR = num
+              .setpBook(bookTitle)
+              .setpRate(userRate)
+              .setpNOfR(numOfRates)
+              .setpRateAvg(rateAvg)
+              .build();
     }
 }
