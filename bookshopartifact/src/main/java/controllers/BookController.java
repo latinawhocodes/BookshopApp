@@ -3,6 +3,8 @@ package controllers;
 import models.Book;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +21,12 @@ public class BookController {
 			}
 		}
 		return filteredBooks;
+	}
+	
+	@GetMapping ("/books/Top10")
+	List <Book> getTop10Sellers () {
+		List <Book> books = Book.GetAllBooks();
+		Collections.sort(books, (o1, o2) -> -1 * Integer.compare(o1.getCopiesSold(), o2.getCopiesSold()));
+		return books.subList(0, Math.min(books.size(), 9));
 	}
 }
