@@ -20,4 +20,18 @@ public class BookController {
 		}
 		return filteredBooks;
 	}
+
+	
+	@GetMapping ("/books/ISBN/{ISBN}")
+	List <Book> getBooksByISBN (@PathVariable String ISBN) {
+		List <Book> books = Book.GetAllBooks();
+		List <Book> filteredBooks = new ArrayList <Book> ();
+		for (Book b : books) {
+			if (b.getISBN ().equalsIgnoreCase (ISBN)) {
+				filteredBooks.add(b);				
+			}
+		}
+		return filteredBooks;
+	}
+	
 }

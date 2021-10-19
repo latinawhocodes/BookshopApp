@@ -27,4 +27,5 @@ class BookshopartifactApplicationTests {
 		assertEquals(50000000, book.getCopiesSold());
 	}
 
+	
 }
