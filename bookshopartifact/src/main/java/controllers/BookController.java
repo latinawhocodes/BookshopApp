@@ -33,5 +33,17 @@ public class BookController {
 		}
 		return filteredBooks;
 	}
+
+	@GetMapping ("/books/Author/{Author}")
+	List <Book> getBooksByAuthor (@PathVariable String Author) {
+		List <Book> books = Book.GetAllBooks();
+		List <Book> filteredBooks = new ArrayList <Book> ();
+		for (Book b : books) {
+			if (b.getAuthor ().equalsIgnoreCase (Author)) {
+				filteredBooks.add(b);				
+			}
+		}
+		return filteredBooks;
+	}
 	
 }
