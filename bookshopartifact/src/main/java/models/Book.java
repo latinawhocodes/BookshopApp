@@ -14,6 +14,7 @@ public class Book {
 	private String Publisher;
 	private int YearPublished;
 	private int CopiesSold;
+    private double Rating;
 	
 	public Book () {
 		
@@ -102,6 +103,14 @@ public class Book {
 	public void setCopiesSold(int copiesSold) {
 		CopiesSold = copiesSold;
 	}
+	    
+    public double getRating() {
+        return Rating;
+    }
+
+    public void setRating(double rating) {
+        Rating = rating;
+    }
 	
     public static ArrayList<Book> GetAllBooks() {
         ArrayList<Book> books = new ArrayList<Book>();
@@ -126,5 +135,42 @@ public class Book {
         }
         return books;
     }
-
+    public static ArrayList<Book> GetBooksWithRatingAndHigher(int rating) {
+        ArrayList<Book> books = new ArrayList<Book>();
+        Database.SetConnection();
+        ResultSet resultSet = Database.ExecuteSQL("SELECT B.ISBN\r\n"
+                                                    + "    , B.Name\r\n"
+                                                    + "    , B.Description\r\n"
+                                                    + "    , B.Price\r\n"
+                                                    + "    , B.Author\r\n"
+                                                    + "    , B.Genre\r\n"
+                                                    + "    , B.Publisher\r\n"
+                                                    + "    , B.YearPublished\r\n"
+                                                    + "    , B.CopiesSold\r\n"
+                                                    + "    , AVG(R.Rating) AverageRating\r\n"
+                                                    + "FROM Book B\r\n"
+                                                    + "JOIN Ratings R\r\n"
+                                                    + "    ON R.ISBN = B.ISBN\r\n"
+                                                    + "GROUP BY B.ISBN\r\n"
+                                                    + "    , B.Name\r\n"
+                                                    + "    , B.Description\r\n"
+                                                    + "    , B.Price\r\n"
+                                                    + "    , B.Author\r\n"
+                                                    + "    , B.Genre\r\n"
+                                                    + "    , B.Publisher\r\n"
+                                                    + "    , B.YearPublished\r\n"
+                                                    + "    , B.CopiesSold\r\n"
+                                                    + "HAVING AVG(R.Rating) >= " + rating);
+        try {
+            while (resultSet.next ()) {
+                Book book = new Book(resultSet.getString("ISBN"), resultSet.getString("Name"), resultSet.getString("Description"), resultSet.getDouble("Price"), resultSet.getString("Author"), resultSet.getString("Genre"), resultSet.getString("Publisher"), resultSet.getInt("YearPublished"), resultSet.getInt("CopiesSold"));
+                book.Rating = resultSet.getDouble("AverageRating");
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return books;
+    }
 }
+
