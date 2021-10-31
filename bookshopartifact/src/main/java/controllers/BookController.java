@@ -27,6 +27,13 @@ public class BookController {
 	List <Book> getTop10Sellers () {
 		List <Book> books = Book.GetAllBooks();
 		Collections.sort(books, (o1, o2) -> -1 * Integer.compare(o1.getCopiesSold(), o2.getCopiesSold()));
-		return books.subList(0, Math.min(books.size(), 9));
+		return books.subList(0, Math.min(books.size(), 10));
 	}
+	
+    @GetMapping("/books/rating/{rating}")
+    List <Book> getRatedOrHigher (@PathVariable int rating) {
+        List <Book> books = Book.GetBooksWithRatingAndHigher(rating);
+        Collections.sort(books, (o1, o2) -> -1 * Double.compare(o1.getRating(), o2.getRating()));
+        return books;
+    }
 }
