@@ -98,13 +98,6 @@ public Users ()  {/* Default constructor */}
 
     }
 
-/*
- name, userEmail, password, homeAddress
-*/
-
-/*
-(int userId, String userEmail, String password, String name, String homeAddress) 
-*/
     public static Users getUser(String userEmail) {
         Database.SetConnection();
         try {
