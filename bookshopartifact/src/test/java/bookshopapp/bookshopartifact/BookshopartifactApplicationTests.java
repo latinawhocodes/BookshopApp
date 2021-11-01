@@ -27,12 +27,25 @@ class BookshopartifactApplicationTests {
 		return new Users(2, "fake@email.com", "fakePassword");
 	}
 
+		private Users generateFakeUserForUpdateRequest() {
+		return new Users(2, "fake@email.com", "fakePassword123");
+	}
+
 	@Test
 	void userEndpointTest() throws Exception {
 		Gson gson = new Gson();
 		String jsonRequestBody = gson.toJson(generateFakeUser());
 		this.mvc.perform(	
 			get("/users/create")
+			.contentType("application/json").content(jsonRequestBody)).andExpect(status().isOk());
+	}
+
+	@Test
+	void updateUserEndpointTest() throws Exception {
+		Gson gson = new Gson();
+		String jsonRequestBody = gson.toJson(generateFakeUserForUpdateRequest());
+		this.mvc.perform(	
+			get("/users/update")
 			.contentType("application/json").content(jsonRequestBody)).andExpect(status().isOk());
 	}
 
