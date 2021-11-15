@@ -3,8 +3,6 @@ package controllers;
 import models.Book;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,18 +20,30 @@ public class BookController {
 		}
 		return filteredBooks;
 	}
+
 	
-	@GetMapping ("/books/Top10")
-	List <Book> getTop10Sellers () {
+	@GetMapping ("/books/ISBN/{ISBN}")
+	List <Book> getBooksByISBN (@PathVariable String ISBN) {
 		List <Book> books = Book.GetAllBooks();
-		Collections.sort(books, (o1, o2) -> -1 * Integer.compare(o1.getCopiesSold(), o2.getCopiesSold()));
-		return books.subList(0, Math.min(books.size(), 10));
+		List <Book> filteredBooks = new ArrayList <Book> ();
+		for (Book b : books) {
+			if (b.getISBN ().equalsIgnoreCase (ISBN)) {
+				filteredBooks.add(b);				
+			}
+		}
+		return filteredBooks;
+	}
+
+	@GetMapping ("/books/Author/{Author}")
+	List <Book> getBooksByAuthor (@PathVariable String Author) {
+		List <Book> books = Book.GetAllBooks();
+		List <Book> filteredBooks = new ArrayList <Book> ();
+		for (Book b : books) {
+			if (b.getAuthor ().equalsIgnoreCase (Author)) {
+				filteredBooks.add(b);				
+			}
+		}
+		return filteredBooks;
 	}
 	
-    @GetMapping("/books/rating/{rating}")
-    List <Book> getRatedOrHigher (@PathVariable int rating) {
-        List <Book> books = Book.GetBooksWithRatingAndHigher(rating);
-        Collections.sort(books, (o1, o2) -> -1 * Double.compare(o1.getRating(), o2.getRating()));
-        return books;
-    }
 }
