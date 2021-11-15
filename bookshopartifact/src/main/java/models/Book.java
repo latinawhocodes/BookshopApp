@@ -14,7 +14,7 @@ public class Book {
 	private String Publisher;
 	private int YearPublished;
 	private int CopiesSold;
-    private double Rating;
+	private double Rating;
 	
 	public Book () {
 		
@@ -103,8 +103,8 @@ public class Book {
 	public void setCopiesSold(int copiesSold) {
 		CopiesSold = copiesSold;
 	}
-	    
-    public double getRating() {
+	
+	public double getRating() {
         return Rating;
     }
 
@@ -135,6 +135,7 @@ public class Book {
         }
         return books;
     }
+    
     public static ArrayList<Book> GetBooksWithRatingAndHigher(int rating) {
         ArrayList<Book> books = new ArrayList<Book>();
         Database.SetConnection();
@@ -172,5 +173,5 @@ public class Book {
         }
         return books;
     }
-}
 
+}
