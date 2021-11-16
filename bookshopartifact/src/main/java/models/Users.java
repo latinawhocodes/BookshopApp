@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
+
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
@@ -80,14 +82,14 @@ public Users ()  {/* Default constructor */}
          try {
         Database.SetConnection();
      
-            String query = "UPDATE users SET  password = ? , homeAddress = ? WHERE name = ?" ;
+            String query = "UPDATE users SET  password = ? , homeAddress = ? WHERE userEmail = ?" ;
         
         PreparedStatement pstmt = Database.connection.prepareStatement(query);
         
        
             pstmt.setString(1, user.getPassword());
             pstmt.setString(2, user.getHomeAddress());
-            pstmt.setString(3, user.getName());
+            pstmt.setString(3, user.getUserEmail());
             pstmt.executeUpdate();
 
         } catch (Exception e) {
@@ -125,6 +127,51 @@ public Users ()  {/* Default constructor */}
         old_user.setPassword(user.getPassword());
         Users.updateSingleUser(old_user);
         return old_user;
+    }
+
+    public static void addCreditCardToUser(int user_id, CreditCard creditCard) {
+        try {
+            Database.SetConnection();
+         
+                String query = "Insert INTO credit_cards ( user_id, card_no, cvc_code, card_holder_name, expiration_date) VALUES (?,?,?,?,?)";
+            
+            PreparedStatement pstmt = Database.connection.prepareStatement(query);
+            
+           pstmt.setInt(1, user_id);
+            pstmt.setString(2, creditCard.card_no);
+                pstmt.setString(3, creditCard.cvc_code);
+                pstmt.setString(4, creditCard.card_holder_name);
+                pstmt.setString(5, creditCard.expiration_date);
+
+                pstmt.executeUpdate();
+    
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                System.out.println(e.getMessage());
+            }
+    }
+
+    public static ArrayList<CreditCard> getCreditCards(String userEmail) {
+        Database.SetConnection();
+        ArrayList<CreditCard> cards = new ArrayList<CreditCard>();
+        try {
+        String query = "SELECT  cs. id, cs.user_id, cs.card_no, cs.cvc_code, cs.card_holder_name, cs.expiration_date FROM users left join credit_cards cs on (users.userid = cs.user_id) WHERE userEmail = ?";
+        
+        PreparedStatement pstmt = Database.connection.prepareStatement(query);
+         pstmt.setString(1, userEmail);
+         ResultSet resultSet = pstmt.executeQuery();
+            while(resultSet.next ()){
+
+                CreditCard card = new CreditCard(resultSet.getInt("id"),resultSet.getInt("user_id"), resultSet.getString("card_no"), resultSet.getString("cvc_code"), resultSet.getString("card_holder_name"),resultSet.getString("expiration_date"));
+                cards.add(card);
+            }
+              
+              
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return cards;
     }
 
 }
