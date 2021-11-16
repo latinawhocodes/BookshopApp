@@ -80,14 +80,14 @@ public Users ()  {/* Default constructor */}
          try {
         Database.SetConnection();
      
-            String query = "UPDATE users SET  password = ? , homeAddress = ? WHERE name = ?" ;
+            String query = "UPDATE users SET  password = ? , homeAddress = ? WHERE userEmail = ?" ;
         
         PreparedStatement pstmt = Database.connection.prepareStatement(query);
         
        
             pstmt.setString(1, user.getPassword());
             pstmt.setString(2, user.getHomeAddress());
-            pstmt.setString(3, user.getName());
+            pstmt.setString(3, user.getUserEmail());
             pstmt.executeUpdate();
 
         } catch (Exception e) {
