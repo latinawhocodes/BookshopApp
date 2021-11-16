@@ -15,7 +15,6 @@ public class Book {
 	private int YearPublished;
 	private int CopiesSold;
 	private double Rating;
-
 	
 	public Book () {
 		
@@ -104,7 +103,7 @@ public class Book {
 	public void setCopiesSold(int copiesSold) {
 		CopiesSold = copiesSold;
 	}
-  
+	
 	public double getRating() {
         return Rating;
     }
@@ -176,4 +175,3 @@ public class Book {
     }
 
 }
-
